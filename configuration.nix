@@ -21,9 +21,7 @@
   hardware.graphics.enable = true;
 
   services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.settings = {
-    General.Numlock = "on";
-  };
+  services.displayManager.sddm.autoNumlock = true;
   services.desktopManager.plasma6.enable = true;
   services.xserver.xkb.layout = "pl";
 
