@@ -2,7 +2,7 @@
   description = "My personal NixOS config";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -27,7 +27,7 @@
           home-manager.useUserPackages = true;
           home-manager.users.mrcapi = import ./home.nix;
           home-manager.sharedModules = [
-            plasma-manager.homeManagerModules.plasma-manager
+            plasma-manager.homeModules.plasma-manager
           ];
         }
       ];

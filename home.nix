@@ -8,12 +8,10 @@
   programs.plasma = {
     enable = true;
 
-    kwinrc = {
-      "Effect-shakecursor"."Enabled" = false;
-      "ElectricBorders" = {
-        "EdgeBarrier" = 0;
-        "CornerBarrier" = false;
-      };
+    kwin = {
+      effects.shakeCursor.enable = false;
+      edgeBarrier = 0;
+      cornerBarrier = false;
     };
   };
 }
