@@ -1,5 +1,9 @@
 { config, lib, pkgs, ... }:
 
+let
+  username = "mrcapi";
+  os_version = "26.05";
+in
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -30,7 +34,7 @@
     alsa.enable = true;
   };
 
-  users.users.mrcapi = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" "audio" ];
   };
@@ -60,7 +64,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "26.05";
+  system.stateVersion = os_version;
 
   boot.initrd.preLVMCommands = "${pkgs.kbd}/bin/setleds +num";
 }

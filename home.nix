@@ -1,9 +1,13 @@
 { pkgs, ... }:
 
+let
+  username = "mrcapi";
+  os_version = "26.05";
+in
 {
-  home.username = "mrcapi";
-  home.homeDirectory = "/home/mrcapi";
-  home.stateVersion = "26.05";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
+  home.stateVersion = os_version;
 
   programs.plasma = {
     enable = true;

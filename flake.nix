@@ -16,21 +16,26 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager, ... }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+  outputs = { nixpkgs, home-manager, plasma-manager, ... }:
+    let
+      username = "mrcapi";
       system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.mrcapi = import ./home.nix;
-          home-manager.sharedModules = [
-            plasma-manager.homeModules.plasma-manager
-          ];
-        }
-      ];
+    in
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users."${username}" = import ./home.nix;
+            home-manager.sharedModules = [
+              plasma-manager.homeModules.plasma-manager
+            ];
+          }
+        ];
+      };
     };
-  };
 }
