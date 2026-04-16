@@ -10,6 +10,11 @@ Make sure you have internet:
 If no internet, connect wifi:
   $ nmtui
 
+TIP: to copy/paste in the text console, start gpm:
+  $ sudo nix-shell -p gpm --run "sudo gpm -m /dev/input/mice -t imps2"
+Then select text with left mouse button and paste with
+middle button (or both buttons together on a 2-button mouse).
+
 
 STEP 1: Find your target disk
 -------------------------------
@@ -40,6 +45,22 @@ STEP 2: Clone the config repo
   $ cd /tmp
   $ git clone https://github.com/MisterCapi/nixos-config.git
   $ cd nixos-config
+
+
+STEP 2.5: Grow the live ISO nix store tmpfs
+---------------------------------------------
+The live ISO keeps downloaded/built packages in a tmpfs
+overlay at /nix/.rw-store. Default size is ~50% RAM, which
+can be too small when disko-install builds the nvidia driver
+(OOM -> install crashes).
+
+Bump it to 75% of RAM before running disko-install:
+  $ sudo mount -o remount,size=75% /nix/.rw-store
+
+Check it:
+  $ df -h /nix/.rw-store
+
+This only affects the live ISO session, not the installed system.
 
 
 STEP 3: Install (THIS WIPES THE TARGET DISK)

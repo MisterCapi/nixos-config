@@ -37,7 +37,10 @@ in
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "video" "audio" ];
+    initialPassword = "changeme";
   };
+
+  users.users.root.initialPassword = "changeme";
 
   environment.systemPackages = with pkgs; [
     ghostty
@@ -55,10 +58,7 @@ in
     memoryPercent = 50;
   };
 
-  swapDevices = [{
-    device = "/swapfile";
-    size = 16384;
-  }];
+  # swap: only zram (above), no swapfile needed on btrfs
 
   services.openssh.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

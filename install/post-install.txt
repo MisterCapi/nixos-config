@@ -3,10 +3,14 @@
   Run this AFTER you've booted into fresh NixOS
 ================================================================
 
-STEP 1: Login and set user password
--------------------------------------
-Login as root (password from installation).
+STEP 1: Login and set passwords
+---------------------------------
+Login as root (initial password: changeme).
 
+Change root password:
+  $ passwd
+
+Set user password:
   $ passwd mrcapi
 
 Logout, login as mrcapi.
