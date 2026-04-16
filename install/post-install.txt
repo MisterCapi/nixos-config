@@ -1,0 +1,98 @@
+================================================================
+  NixOS Post-Install Guide
+  Run this AFTER you've booted into fresh NixOS
+================================================================
+
+STEP 1: Login and set user password
+-------------------------------------
+Login as root (password from installation).
+
+  $ passwd mrcapi
+
+Logout, login as mrcapi.
+
+
+STEP 2: Clone your config
+---------------------------
+  $ cd ~
+  $ git clone https://github.com/MisterCapi/nixos-config.git
+  $ cd nixos-config
+
+
+STEP 3: Regenerate hardware-configuration.nix
+-----------------------------------------------
+This detects YOUR hardware (kernel modules, CPU, GPU, etc):
+
+  $ sudo nixos-generate-config --no-filesystems --dir .
+
+--no-filesystems is important: disko manages disks, not this file.
+
+Check the result:
+  $ cat hardware-configuration.nix
+
+Should have your kernel modules, CPU microcode, etc.
+Should NOT have fileSystems or swapDevices.
+
+
+STEP 4: Update flake lock # TODO: remove this step later as disko will be in flake.lock
+---------------------------
+  $ nix flake lock --update-input disko
+
+This adds disko to flake.lock (it's missing because we
+added it from Windows where nix isn't available).
+
+
+STEP 5: Rebuild and switch
+----------------------------
+  $ sudo nixos-rebuild switch --flake .#nixos
+
+If it works - congratulations, you have a working NixOS.
+
+
+STEP 6: Commit everything back
+--------------------------------
+  $ git add -A
+  $ git commit -m "Post-install: update hardware config and lock"
+  $ git push
+
+
+STEP 7: Verify
+----------------
+Check that everything is mounted correctly:
+  $ lsblk
+  $ mount | grep btrfs
+
+Check swap:
+  $ swapon --show
+  (should show zram, nothing else)
+
+Check nvidia:
+  $ nvidia-smi
+  (should show your RTX 3090)
+
+
+================================================================
+  IF SOMETHING WENT WRONG
+================================================================
+
+Q: nixos-rebuild fails with "disko not in lock"
+A: $ nix flake lock --update-input disko
+   Then retry rebuild.
+
+Q: nvidia-smi says "command not found" or driver error
+A: Check configuration.nix has:
+     services.xserver.videoDrivers = [ "nvidia" ];
+     hardware.nvidia.modesetting.enable = true;
+     hardware.nvidia.open = false;
+   Then: $ sudo nixos-rebuild switch --flake .#nixos
+
+Q: No sound
+A: PipeWire is configured. Check:
+     $ wpctl status
+   If nothing shows, reboot once.
+
+Q: Plasma doesn't start / black screen after login
+A: Switch to TTY (Ctrl+Alt+F2), login, check logs:
+     $ journalctl -b -p err
+
+================================================================
