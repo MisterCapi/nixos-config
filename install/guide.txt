@@ -1,0 +1,108 @@
+================================================================
+  NixOS Fresh Install Guide (no GUI)
+  cat this file and follow step by step
+================================================================
+
+STEP 0: Boot into NixOS live ISO
+----------------------------------
+Make sure you have internet:
+  $ ping -c 2 google.com
+If no internet, connect wifi:
+  $ nmtui
+
+
+STEP 1: Find your target disk
+-------------------------------
+List all disks:
+  $ lsblk -d -o NAME,SIZE,MODEL
+
+Pick the disk you want to install on.
+
+Get its stable ID (ignore lines with "part" or "wwn"):
+  $ ls -l /dev/disk/by-id/ | grep -v part | grep -v wwn
+
+Find the line pointing to your disk (e.g. -> ../../sdb).
+The ID looks like:
+  ata-Samsung_SSD_860_EVO_500GB_XXXXXXXXXXXX
+  nvme-WD_Black_SN850X_2000GB_XXXXXXXXXXXX
+
+Verify it resolves correctly:
+  $ readlink -f /dev/disk/by-id/YOUR_DISK_ID
+
+Make sure nothing from that disk is mounted:
+  $ mount | grep sdX           # replace sdX with your disk
+  $ sudo umount /dev/sdX* 2>/dev/null
+
+
+STEP 2: Clone the config repo
+-------------------------------
+  $ nix-shell -p git
+  $ cd /tmp
+  $ git clone https://github.com/MisterCapi/nixos-config.git
+  $ cd nixos-config
+
+
+STEP 3: Install (THIS WIPES THE TARGET DISK)
+----------------------------------------------
+One command does everything - partitions, formats, mounts,
+and installs NixOS:
+
+  $ sudo nix run \
+      --experimental-features "nix-command flakes" \
+      github:nix-community/disko/latest#disko-install -- \
+      --flake /tmp/nixos-config#nixos \
+      --disk system /dev/disk/by-id/YOUR_DISK_ID \
+      --write-efi-boot-entries
+
+Replace YOUR_DISK_ID with the ID from step 1.
+
+"--disk system" matches the disk name in disk-config.nix.
+"--write-efi-boot-entries" adds a UEFI boot entry so your
+BIOS knows to boot from this disk.
+
+It will ask for root password at the end. Set it.
+
+
+STEP 4: Reboot
+---------------
+  $ sudo reboot
+
+Remove USB stick. If it doesn't boot, set the target disk
+as first boot device in BIOS.
+
+
+STEP 5: Post-install
+----------------------
+Login as root (password from step 3).
+Set user password:
+  $ passwd mrcapi
+
+Login as mrcapi, clone config to home:
+  $ git clone https://github.com/mrcapivern/nixos-config.git
+  $ cd nixos-config
+  $ sudo nixos-rebuild switch --flake .#nixos
+
+
+================================================================
+  TROUBLESHOOTING
+================================================================
+
+Q: disko-install says "device not found"
+A: $ ls /dev/disk/by-id/
+   Find correct ID, use it in the --disk flag.
+
+Q: "flake attribute not found"
+A: The part after # must match nixosConfigurations in flake.nix.
+   Currently that's: --flake /tmp/nixos-config#nixos
+
+Q: Boot fails, goes to BIOS
+A: Set correct disk as first boot device in BIOS.
+   If still broken, boot live ISO:
+     $ sudo mount /dev/sdX1 /mnt
+     $ ls /mnt    # should contain EFI/ folder
+
+Q: Black screen (nvidia)
+A: In systemd-boot menu press 'e', add 'nomodeset' to
+   kernel params. Fix nvidia config after booting.
+
+================================================================

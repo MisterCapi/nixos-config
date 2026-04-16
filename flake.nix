@@ -14,9 +14,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager, ... }:
+  outputs = { nixpkgs, home-manager, plasma-manager, disko, ... }:
     let
       username = "mrcapi";
       system = "x86_64-linux";
@@ -25,6 +30,8 @@
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
+          disko.nixosModules.disko
+          ./install/disk-config.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager
           {
