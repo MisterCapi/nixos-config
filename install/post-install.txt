@@ -38,29 +38,21 @@ Should have your kernel modules, CPU microcode, etc.
 Should NOT have fileSystems or swapDevices.
 
 
-STEP 4: Update flake lock # TODO: remove this step later as disko will be in flake.lock
----------------------------
-  $ nix flake lock --update-input disko
-
-This adds disko to flake.lock (it's missing because we
-added it from Windows where nix isn't available).
-
-
-STEP 5: Rebuild and switch
+STEP 4: Rebuild and switch
 ----------------------------
   $ sudo nixos-rebuild switch --flake .#nixos
 
 If it works - congratulations, you have a working NixOS.
 
 
-STEP 6: Commit everything back
+STEP 5: Commit everything back
 --------------------------------
   $ git add -A
   $ git commit -m "Post-install: update hardware config and lock"
   $ git push
 
 
-STEP 7: Verify
+STEP 6: Verify
 ----------------
 Check that everything is mounted correctly:
   $ lsblk
