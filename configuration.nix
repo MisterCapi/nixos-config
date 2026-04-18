@@ -51,6 +51,8 @@ in
     curl
     htop
     firefox
+    opencode
+    telegram-desktop
   ];
 
   zramSwap = {
