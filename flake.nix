@@ -2,7 +2,15 @@
   description = "My personal NixOS config";
 
   inputs = {
+    # Channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # Flake parts (allows to partition the flake into modules and import them here)
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+
+    # Wrapper modules (idk what is does yet -> TODO: learn)
+    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,28 +29,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager, disko, ... }:
-    let
-      username = "mrcapi";
-      system = "x86_64-linux";
-    in
-    {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          disko.nixosModules.disko
-          ./install/disk-config.nix
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users."${username}" = import ./home.nix;
-            home-manager.sharedModules = [
-              plasma-manager.homeModules.plasma-manager
-            ];
-          }
-        ];
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake
+    { inherit inputs; }
+    (inputs.import-tree ./modules);
 }
