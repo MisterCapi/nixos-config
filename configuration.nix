@@ -53,6 +53,7 @@ in
     firefox
     opencode
     telegram-desktop
+    discord
   ];
 
   zramSwap = {
