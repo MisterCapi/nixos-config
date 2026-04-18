@@ -54,8 +54,9 @@ in
     opencode
     telegram-desktop
     discord
-    noisetorch
   ];
+
+  programs.noisetorch.enable = true;
 
   zramSwap = {
     enable = true;
