@@ -40,8 +40,8 @@
         "Mod+Shift+Next".action.move-column-to-workspace-down = {};
         "Mod+Shift+Prior".action.move-column-to-workspace-up = {};
   
-        "Mod+Next".action.switch-workspace-down = {};
-        "Mod+Prior".action.switch-workspace-up = {};
+        "Mod+Next".action.focus-workspace-down = {};
+        "Mod+Prior".action.focus-workspace-up = {};
   
         "Mod+R".action.switch-preset-column-widths = {};
         "Mod+M".action.maximize-column = {};
