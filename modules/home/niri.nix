@@ -20,13 +20,11 @@
       ];
 
       # Podstawowe bindy - reszta defaultowo z niri
-      binds = with {
-        Mod = "Mod4";  # Super
-      }; {
-        "${Mod}+Return".action.spawn = "ghostty";
-        "${Mod}+D".action.spawn = "fuzzel";
-        "${Mod}+Shift+E".action.quit = [];
-        "${Mod}+Q".action.close-window = [];
+      binds = {
+        "Mod+Return".action.spawn = "ghostty";
+        "Mod+D".action.spawn = "fuzzel";
+        "Mod+Shift+E".action.quit = [];
+        "Mod+Q".action.close-window = [];
         # reszta bindów defaultowa - niri ma sensowne domyślne
       };
 
