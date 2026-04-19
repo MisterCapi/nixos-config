@@ -24,6 +24,9 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Wsparcie hardware dla laptopa
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake

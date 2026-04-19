@@ -10,6 +10,7 @@ in
     modules = commonModules ++ [
       # === Hardware tego hosta (underscore = host-specific, nie w rejestrze) ===
       ./_hardware.nix
+      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
       ./_disko.nix
       inputs.disko.nixosModules.disko
 
