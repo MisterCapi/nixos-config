@@ -99,7 +99,7 @@ Set user password:
   $ passwd mrcapi
 
 Login as mrcapi, clone config to home:
-  $ git clone https://github.com/mrcapivern/nixos-config.git
+  $ git clone https://github.com/MisterCapi/nixos-config.git
   $ cd nixos-config
   $ sudo nixos-rebuild switch --flake .#<pc or laptop>
 
