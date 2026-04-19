@@ -37,11 +37,11 @@
         "Mod+Shift+H".action.move-column-left = {};
         "Mod+Shift+L".action.move-column-right = {};
   
-        "Mod+Shift+PageDown".action.move-column-to-workspace-down = {};
-        "Mod+Shift+PageUp".action.move-column-to-workspace-up = {};
+        "Mod+Shift+Next".action.move-column-to-workspace-down = {};
+        "Mod+Shift+Prior".action.move-column-to-workspace-up = {};
   
-        "Mod+PageDown".action.switch-workspace-down = {};
-        "Mod+PageUp".action.switch-workspace-up = {};
+        "Mod+Next".action.switch-workspace-down = {};
+        "Mod+Prior".action.switch-workspace-up = {};
   
         "Mod+R".action.switch-preset-column-widths = {};
         "Mod+M".action.maximize-column = {};
