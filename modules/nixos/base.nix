@@ -8,21 +8,22 @@
     i18n.defaultLocale = "en_US.UTF-8";
     console.keyMap = "pl2";
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      # Cache dla Niri żeby nie rekompilować lokalnie
+      trusted-users = [ "root" "@wheel" ];
+      substituters = [
+        "https://cache.nixos.org"
+        "https://niri.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+      ];
+    };
+
     nixpkgs.config.allowUnfree = true;
 
-    # Cache dla Niri żeby nie rekompilować lokalnie
-    trusted-users = [ "root" "@wheel" ];
-
-    substituters = [
-      "https://cache.nixos.org"
-      "https://niri.cachix.org"
-    ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
-    ];
-    
     # OS version
     system.stateVersion = config.my.stateVersion;
   };
