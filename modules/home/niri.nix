@@ -43,14 +43,13 @@
         "Mod+Next".action.focus-workspace-down = {};
         "Mod+Prior".action.focus-workspace-up = {};
   
-        "Mod+R".action.switch-preset-column-widths = {};
+        "Mod+R".action.switch-preset-column-width = {};
         "Mod+M".action.maximize-column = {};
   
         "Mod+Comma".action.consume-or-expel-window-left = {};
         "Mod+Period".action.consume-or-expel-window-right = {};
   
         "Mod+V".action.toggle-window-floating = {};
-        "Mod+F".action.toggle-focus-follows-mouse = {};
   
         "Mod+Slash".action.show-hotkey-overlay = {};
         "Mod+O".action.toggle-overview = {};
