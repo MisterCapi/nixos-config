@@ -40,7 +40,7 @@ Should NOT have fileSystems or swapDevices.
 
 STEP 4: Rebuild and switch
 ----------------------------
-  $ sudo nixos-rebuild switch --flake .#nixos
+  $ sudo nixos-rebuild switch --flake .#<pc or laptop>
 
 If it works - congratulations, you have a working NixOS.
 
@@ -80,7 +80,7 @@ A: Check configuration.nix has:
      services.xserver.videoDrivers = [ "nvidia" ];
      hardware.nvidia.modesetting.enable = true;
      hardware.nvidia.open = false;
-   Then: $ sudo nixos-rebuild switch --flake .#nixos
+   Then: $ sudo nixos-rebuild switch --flake .#<pc or laptop>
 
 Q: No sound
 A: PipeWire is configured. Check:

@@ -16,7 +16,7 @@ Then select text with left mouse button and paste with
 middle button (or both buttons together on a 2-button mouse).
 
 
-STEP 1: Find your target disk
+STEP 1: Find your target system disk
 -------------------------------
 List all disks:
   $ lsblk -d -o NAME,SIZE,MODEL
@@ -71,7 +71,7 @@ and installs NixOS:
   $ sudo nix run \
       --experimental-features "nix-command flakes" \
       github:nix-community/disko/latest#disko-install -- \
-      --flake /tmp/nixos-config#nixos \
+      --flake /tmp/nixos-config#<pc or laptop> \
       --disk system /dev/disk/by-id/YOUR_DISK_ID \
       --write-efi-boot-entries
 
@@ -101,7 +101,7 @@ Set user password:
 Login as mrcapi, clone config to home:
   $ git clone https://github.com/mrcapivern/nixos-config.git
   $ cd nixos-config
-  $ sudo nixos-rebuild switch --flake .#nixos
+  $ sudo nixos-rebuild switch --flake .#<pc or laptop>
 
 
 ================================================================
@@ -114,7 +114,7 @@ A: $ ls /dev/disk/by-id/
 
 Q: "flake attribute not found"
 A: The part after # must match nixosConfigurations in flake.nix.
-   Currently that's: --flake /tmp/nixos-config#nixos
+   Currently that's: --flake /tmp/nixos-config#<pc or laptop>
 
 Q: Boot fails, goes to BIOS
 A: Set correct disk as first boot device in BIOS.
