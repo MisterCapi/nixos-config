@@ -10,9 +10,6 @@
       wayland.enable = true;  # ważne dla niri
     };
 
-    # Klawiatura dla TTY i loginu
-    console.keyMap = "pl";
-
     # xwayland-satellite - żeby X11 apki działały
     environment.systemPackages = with pkgs; [
       xwayland-satellite

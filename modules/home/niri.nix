@@ -1,7 +1,5 @@
 { inputs, ... }: {
   flake.homeModules.niri = { pkgs, ... }: {
-    imports = [ inputs.niri.homeModules.niri ];
-
     # Config niri w Nixie - walidowany w build time
     programs.niri.settings = {
       input = {
