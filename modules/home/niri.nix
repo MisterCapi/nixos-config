@@ -21,11 +21,39 @@
 
       # Podstawowe bindy - reszta defaultowo z niri
       binds = {
+        # spawn apps
         "Mod+Return".action.spawn = "ghostty";
         "Mod+D".action.spawn = "fuzzel";
+
+	# quit window
+	"Mod+Q".action.close-window = [];
+
+	# exit
         "Mod+Shift+E".action.quit = [];
-        "Mod+Q".action.close-window = [];
-        # reszta bindów defaultowa - niri ma sensowne domyślne
+
+        "Mod+H".action = focus-column-left;
+        "Mod+L".action = focus-column-right;
+  
+        "Mod+Shift+H".action = move-column-left;
+        "Mod+Shift+L".action = move-column-right;
+  
+        "Mod+Shift+Page-Down".action = move-column-to-workspace-down;
+        "Mod+Shift+Page-Up".action = move-column-to-workspace-up;
+  
+        "Mod+Page-Down".action = switch-workspace-down;
+        "Mod+Page-Up".action = switch-workspace-up;
+  
+        "Mod+R".action = switch-preset-column-widths;
+        "Mod+M".action = maximize-column;
+  
+        "Mod+Comma".action = consume-or-expel-window-left;
+        "Mod+Period".action = consume-or-expel-window-right;
+  
+        "Mod+V".action = toggle-window-floating;
+        "Mod+F".action = toggle-focus-follows-mouse; # albo switch-focus-between-floating-and-tiling
+  
+        "Mod+Slash".action = show-hotkey-overlay;
+        "Mod+O".action = toggle-overview;
       };
 
       layout = {
