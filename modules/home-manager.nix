@@ -10,12 +10,9 @@
 
       users.${config.my.username} = {
         imports = [
-	  # === Dependencies (zewnętrzne flake'i dodające opcje do HM) ===
-          inputs.plasma-manager.homeModules.plasma-manager
-
           # === Globalne moduły - aktywne na każdym hoście ===
           # np. self.homeModules.git, self.homeModules.neovim
-          # host-specific rzeczy (plasma, hyprland) idą do hosts/<nazwa>/default.nix
+          # host-specific rzeczy idą do hosts/<nazwa>/default.nix
 	  self.homeModules.niri
         ];
         home.username = config.my.username;
