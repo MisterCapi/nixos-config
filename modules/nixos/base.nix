@@ -11,6 +11,12 @@
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nixpkgs.config.allowUnfree = true;
 
+    # Cache dla Niri żeby nie rekompilować lokalnie
+    nix.settings = {
+      substituters = [ "https://niri.cachix.org" ];
+      trusted-public-keys = [ "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" ];
+    };
+
     system.stateVersion = config.my.stateVersion;
   };
 }

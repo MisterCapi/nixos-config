@@ -8,5 +8,5 @@
   self.nixosModules.ram-settings
   self.nixosModules.packages-common
   self.nixosModules.home-manager
-  self.nixosModules.plasma
+  self.nixosModules.niri
 ]

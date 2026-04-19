@@ -16,7 +16,7 @@
           # === Globalne moduły - aktywne na każdym hoście ===
           # np. self.homeModules.git, self.homeModules.neovim
           # host-specific rzeczy (plasma, hyprland) idą do hosts/<nazwa>/default.nix
-	  self.homeModules.plasma
+	  self.homeModules.niri
         ];
         home.username = config.my.username;
         home.homeDirectory = "/home/${config.my.username}";
