@@ -45,7 +45,7 @@
       mako                # daemon notyfikacji
       swaylock            # lockscreen
       swayidle            # idle detector
-      swww                # wallpaper
+      awww                # wallpaper
       wl-clipboard        # clipboard CLI
       grim                # screenshot
       slurp               # region selector
