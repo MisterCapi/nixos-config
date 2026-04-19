@@ -2,6 +2,7 @@
   flake.nixosModules.niri = { pkgs, ... }: {
     imports = [ inputs.niri.nixosModules.niri ];
 
+    programp.niri.package = pkgs.niri;
     programs.niri.enable = true;
 
     # Login menedżer - zostawiamy SDDM (już masz), niri-session pojawi się automatycznie
