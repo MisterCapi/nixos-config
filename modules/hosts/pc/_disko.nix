@@ -1,11 +1,9 @@
-# Disko disk config - works with any disk.
-# Device is set via CLI flag: --disk system /dev/disk/by-id/YOUR_DISK_ID
 {
   disko.devices = {
     disk = {
       system = {
         type = "disk";
-        device = "";
+        device = "/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S4XBNE0M708608K";
         content = {
           type = "gpt";
           partitions = {
