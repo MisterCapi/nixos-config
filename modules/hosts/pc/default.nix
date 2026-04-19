@@ -1,38 +1,30 @@
 { self, inputs, ... }:
 let
   hostname = "pc";
+  commonModules = import ../_common.nix { inherit self; };
 in
 {
   flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     specialArgs = { inherit self inputs; };
-    modules = [
-      # host-specific, explicit bo underscore
+    modules = commonModules ++ [
+      # === Hardware tego hosta (underscore = host-specific, nie w rejestrze) ===
       ./_hardware.nix
       ./_disko.nix
       inputs.disko.nixosModules.disko
+      
+      # === Moduły tylko dla tego hosta ===
+      self.nixosModules.nvidia
 
-      # features z rejestru
-      self.nixosModules.base
-      self.nixosModules.boot
-      self.nixosModules.networking
-      self.nixosModules.users
-      self.nixosModules.audio
-      self.nixosModules.plasma
-      self.nixosModules.ram-settings
-      self.nixosModules.packages-common
-      self.nixosModules.nvidia          # <-- tylko PC
-      self.nixosModules.home-manager
-
-      # nakładki tego hosta
-      {
+      # === Inline overrides host-level ===
+      ({ config, ... }: {
         networking.hostName = hostname;
 
-        # dokładamy home modules dla tego hosta
-        home-manager.users.mrcapi.imports = [
-          self.homeModules.plasma
+        # home modules aktywne tylko na tym hoście
+        home-manager.users.${config.my.username}.imports = [
+          # dodawane jako self.homeModules.<nazwa_modułu>
         ];
-      }
+      })
     ];
   };
 }

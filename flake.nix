@@ -9,9 +9,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
 
-    # Wrapper modules (idk what is does yet -> TODO: learn)
-    wrapper-modules.url = "github:BirdeeHub/nix-wrapper-modules";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
