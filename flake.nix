@@ -26,6 +26,12 @@
 
     # Wsparcie hardware dla laptopa
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    # Stylix to make everything look RosePine
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake

@@ -9,4 +9,5 @@
   self.nixosModules.packages-common
   self.nixosModules.home-manager
   self.nixosModules.niri
+  self.nixosModules.stylix
 ]

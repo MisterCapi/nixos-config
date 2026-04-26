@@ -1,5 +1,6 @@
 { ... }: 
 {
+  # Eza is here only for `tree`
   flake.homeModules.eza = {
     programs.eza = {
       enable = true;
