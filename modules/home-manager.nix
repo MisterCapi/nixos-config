@@ -17,6 +17,8 @@
           # host-specific rzeczy idą do hosts/<nazwa>/default.nix
 	  self.homeModules.niri
 	  self.homeModules.eza
+	  self.homeModules.bash 
+	  # replace it later with better shell
         ];
         home.username = config.my.username;
         home.homeDirectory = "/home/${config.my.username}";
