@@ -7,10 +7,10 @@
     };
 
     wallpaper = pkgs.runCommand "wallpaper-rose-pine.png" {
-      buildInputs = [ pkgs.lutgen pkgs.imagemagick ];
+      buildInputs = [ pkgs.lutgen ];
     } ''
         lutgen apply --palette rose-pine ${original} -o $out
-      '';
+    '';
   in {
     imports = [ inputs.stylix.nixosModules.stylix ];
 

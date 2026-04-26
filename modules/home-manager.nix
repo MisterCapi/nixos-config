@@ -9,7 +9,8 @@
       useGlobalPkgs = true;
       useUserPackages = true;
       extraSpecialArgs = { inherit inputs; }; # dodatkowe args dla home modules
-
+      backupFileExtension = "hm-bak";
+      overwriteBackup = true;
       users.${config.my.username} = {
           # === Globalne moduły - aktywne na każdym hoście ===
           # np. self.homeModules.git, self.homeModules.neovim
