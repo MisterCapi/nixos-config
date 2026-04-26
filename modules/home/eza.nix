@@ -4,7 +4,7 @@
     programs.eza = {
       enable = true;
       colors = "auto";
-      enableNushellIntegration = true;
+      enableNushellIntegration = false; # Don't override nushell `ls` etc. (keep eza for cool `tree`)
       extraOptions = [ "--group-directories-first" ];
       git = true;
       icons = "auto";
