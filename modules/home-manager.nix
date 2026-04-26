@@ -1,5 +1,7 @@
 { self, inputs, ... }:
 {
+  imports = [ inputs.home-manager.flakeModules.default ];
+
   flake.nixosModules.home-manager = { config, ... }: {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
 
@@ -14,6 +16,7 @@
           # np. self.homeModules.git, self.homeModules.neovim
           # host-specific rzeczy idą do hosts/<nazwa>/default.nix
 	  self.homeModules.niri
+	  self.homeModules.eza
         ];
         home.username = config.my.username;
         home.homeDirectory = "/home/${config.my.username}";
