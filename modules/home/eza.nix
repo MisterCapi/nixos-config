@@ -4,7 +4,7 @@
     programs.eza = {
       enable = true;
       colors = "auto";
-      enableBashIntegration = true;
+      enableNushellIntegration = true;
       extraOptions = [ "--group-directories-first" ];
       git = true;
       icons = "auto";
