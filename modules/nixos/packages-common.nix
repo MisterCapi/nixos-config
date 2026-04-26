@@ -4,6 +4,7 @@
     environment.systemPackages = with pkgs; [
       ghostty
       neovim
+      nushell
       tmux
       git
       wget
