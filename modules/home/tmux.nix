@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.homeModules.tmux = {
+  flake.homeModules.tmux = { pkgs, ... }: {
     programs.tmux = {
       enable = true;
       extraConfig = ''
