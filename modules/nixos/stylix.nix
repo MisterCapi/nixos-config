@@ -27,7 +27,6 @@
       };
 
       autoEnable = true;
-      targets.firefox.profileNames = [ "default" ];
     };
   };
 }
