@@ -4,6 +4,10 @@
     programs.firefox = {
       enable = true;
 
+      profiles = {
+        default = {};
+      };
+
       # Enterprise Policies work globally on all profiles
       policies = {
         # --- 1. Disable Telemetry --- 
