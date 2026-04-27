@@ -18,9 +18,6 @@
 	  imports = builtins.attrValues (
             lib.filterAttrs (name: _: !lib.hasPrefix "_" name) self.homeModules
 	  );
-
-          # Globalne ustawienia stylix - applies to all hosts
-          stylix.targets.firefox.profileNames = [ "default" ];
         home.username = config.my.username;
         home.homeDirectory = "/home/${config.my.username}";
         home.stateVersion = config.my.stateVersion;
