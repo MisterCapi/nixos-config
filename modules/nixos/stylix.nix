@@ -25,6 +25,7 @@
         };
         sizes.terminal = 13;
       };
+
       autoEnable = true;
     };
   };
