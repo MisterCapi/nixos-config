@@ -23,6 +23,7 @@
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       config.niri = {
         default = [ "gnome" "gtk" ];
+      };
     };
   };
 }
