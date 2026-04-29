@@ -366,7 +366,24 @@
         "niri": "niri",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "rosepine-firefox": "rosepine-firefox",
         "stylix": "stylix"
+      }
+    },
+    "rosepine-firefox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772900422,
+        "narHash": "sha256-5QOVoAWYI7qZGaf62Yv+8saJw/Iv8GMK2sJl2xd+JNo=",
+        "owner": "rose-pine",
+        "repo": "firefox",
+        "rev": "efc1896fb77b5e6984e15338659c1c7a23af2fa3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rose-pine",
+        "repo": "firefox",
+        "type": "github"
       }
     },
     "stylix": {
