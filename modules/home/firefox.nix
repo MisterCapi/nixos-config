@@ -1,14 +1,28 @@
-{ ... }:
+{ inputs, config, ... }:
+let
+  profileDir = "${config.home.homeDirectory}/.mozilla/firefox/default";
+in
 {
-  flake.homeModules.firefox = {
-    programs.firefox = {
-      enable = true;
-      profiles = {
-        default = {};
+  programs.firefox = {
+    enable = true;
+    profiles.default = {
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
-      # Needs more settings here like personal and work profiles etc
-      # look at https://gitlab.com/ny-nix-config-group/nynixosconfig/-/blob/main/homeManagerModules/programs/gui/firefox.nix
     };
-    stylix.targets.firefox.profileNames = [ "default" ];
+  };
+
+  stylix.targets.firefox.enable = false;
+
+  home.file = let
+    rp = inputs.rosepine-firefox;
+    chrome = "${profileDir}/chrome";
+  in {
+    "${chrome}/userChrome.css".source  = "${rp}/dist/userChrome.css";
+    "${chrome}/userColors.css".source  = "${rp}/dist/userColors.css";
+    "${chrome}/userContent.css".source = "${rp}/dist/userContent.css";
+    "${chrome}/add.svg".source         = "${rp}/dist/add.svg";
+    "${chrome}/left-arrow.svg".source  = "${rp}/dist/left-arrow.svg";
+    "${chrome}/right-arrow.svg".source = "${rp}/dist/right-arrow.svg";
   };
 }
