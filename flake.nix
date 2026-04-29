@@ -2,6 +2,8 @@
   description = "My personal NixOS config";
 
   inputs = {
+    # =-=-=-= BASE =-=-=-=
+
     # Channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -27,10 +29,17 @@
     # Wsparcie hardware dla laptopa
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    # =-=-=-= STYLING =-=-=-=
+
     # Stylix to make everything look RosePine
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    rosepine-firefox = {
+      url = "github:rose-pine/firefox";
+      flake = false;
     };
   };
 
