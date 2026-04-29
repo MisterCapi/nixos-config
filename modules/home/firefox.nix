@@ -1,9 +1,11 @@
 # modules/home/firefox.nix
 { inputs, ... }:
 {
-  flake.homeModules.firefox = { config, ... }:
+  flake.homeModules.firefox = { config, stylix, ... }:
   let
-    profileDir = "${config.home.homeDirectory}/.mozilla/firefox/default";
+    profileDir = "${config.home.homeDirectory}/.mozilla/firefox/${
+      config.programs.firefox.profiles.default.path
+    }";
   in
   {
     programs.firefox = {
@@ -11,9 +13,12 @@
       profiles.default = {
         settings = {
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "browser.theme.content-theme" = 0;   # 0 = dark, 1 = light, 2 = system
+          "browser.newtabpage.activity-stream.newtabWallpapers.enabled" = false;
         };
       };
     };
+    # TODO: Quick fix for noe, will need do add custom homepage
 
     stylix.targets.firefox.enable = false;
 
